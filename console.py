@@ -91,8 +91,8 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self,args):
-        """Creates an instance.
-        """
+        '''This actually creates an instance.
+        '''
         if line == "" or line is None:
             print("** class name missing **")
         elif line not in storage.classes():
@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
             b.save()
             print(b.id)
 
-    def do_show(self, line):
+    def do_show(self, args):
         """Prints the string representation of an instance.
         """
         if line == "" or line is None:
@@ -120,13 +120,13 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print(storage.all()[key])
 
-    def do_destroy(self, line):
-        """Deletes an instance based on the class name and id.
-        """
+    def do_destroy(self, args):
+        '''This actaully deletes instance based on the class name and id.
+        '''
         if line == "" or line is None:
             print("** class name missing **")
         else:
-            words = line.split(' ')
+            words = args.split(' ')
             if words[0] not in storage.classes():
                 print("** class doesn't exist **")
             elif len(words) < 2:
@@ -139,11 +139,11 @@ class HBNBCommand(cmd.Cmd):
                     del storage.all()[key]
                     storage.save()
 
-    def do_all(self, line):
-        """Prints all string representation of all instances.
-        """
-        if line != "":
-            words = line.split(' ')
+    def do_all(self, args):
+        '''Outputs all string representation of entire instances.
+        '''
+        if args != "":
+            words = args.split(' ')
             if words[0] not in storage.classes():
                 print("** class doesn't exist **")
             else:
@@ -154,24 +154,25 @@ class HBNBCommand(cmd.Cmd):
             new_list = [str(obj) for key, obj in storage.all().items()]
             print(new_list)
 
-    def do_count(self, line):
-        """Counts the instances of a class.
-        """
-        words = line.split(' ')
+    def do_count(self, args):
+        '''This counts the instances of a class.
+        '''
+        words = args.split(' ')
         if not words[0]:
             print("** class name missing **")
         elif words[0] not in storage.classes():
             print("** class doesn't exist **")
         else:
             matches = [
-                k for k in storage.all() if k.startswith(
+                q for q in storage.all() if q.startswith(
                     words[0] + '.')]
             print(len(matches))
 
-    def do_update(self, line):
-        """Updates an instance by adding or updating attribute.
-        """
-        if line == "" or line is None:
+    def do_update(self, args):
+        '''This updates an instance by adding or updating attribute
+           of a class.
+        '''
+        if args == "" or args is None:
             print("** class name missing **")
             return
 
