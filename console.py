@@ -200,7 +200,7 @@ class HBNBCommand(cmd.Cmd):
                 dump = None
                 if not re.search('^".*"$', value):
                     if '.' in value:
-                        cast = float
+                        dump = float
                     else:
                         dump = int
                 else:
