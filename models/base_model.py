@@ -3,7 +3,7 @@
 import uuid
 import json
 from datetime import datetime
-
+import models
 
 class BaseModel():
     """ A class  that defines all attributes/methods for other classes.
@@ -27,10 +27,12 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
     
     def save(self):
         """A public instance method that updates "updated_at" attribute"""
         self.updated_at = datetime.now()
+        models.storage.save()
     
     def to_dict(self):
         """A public instance method that returns a dictionary"""
@@ -43,12 +45,5 @@ class BaseModel():
     def __str__(self):
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
-#obj = BaseModel()
-#my_obj_dict = obj.to_dict()
-#print(my_obj_dict)
-#print(obj.id)
-#print(obj.created_at)
-#print(obj.updated_at)
-#print(str(obj))
 if __name__ == "__main__":
     BaseModel()
