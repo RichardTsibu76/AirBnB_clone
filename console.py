@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         return command
 
     def update_dict(self, classname, uid, s_dict):
-        """Helper method for update() with a dictionary."""
+        '''This helps method for update() with a dictionary'''
         s = s_dict.replace("'", '"')
         d = json.loads(s)
         if not classname:
@@ -74,23 +74,23 @@ class HBNBCommand(cmd.Cmd):
                     setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
 
-    def do_EOF(self, line):
-        """Handles End Of File character.
-        """
+    def do_EOF(self, args):
+        '''This actually handles EOF character.
+        '''
         print()
         return True
 
-    def do_quit(self, line):
-        """Exits the program.
-        """
+    def do_quit(self, args):
+        '''This closes the interprter.
+        '''
         return True
 
     def emptyline(self):
-        """Doesn't do anything on ENTER.
-        """
+        '''This does absolutely nothing on enter.
+        '''
         pass
 
-    def do_create(self, line):
+    def do_create(self,args):
         """Creates an instance.
         """
         if line == "" or line is None:
