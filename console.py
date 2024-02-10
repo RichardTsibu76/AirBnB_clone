@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module for interacting with commandline intepreter via cmd."""
 
+# The cmd module embedded with tools for the interprter
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -10,17 +11,17 @@ import json
 
 class HBNBCommand(cmd.Cmd):
 
-    """Class for the command interpreter."""
+    '''This is the class for the command interpreter.'''
 
     prompt = "(hbnb) "
 
     def default(self, line):
-        """Catch commands if nothing else matches then."""
+        '''detects commands if with no match'''
         # print("DEF:::", line)
         self._precmd(line)
 
     def _precmd(self, line):
-        """Intercepts commands to test for class.syntax()"""
+        '''Intrude commands for testing class.syntax()'''
         # print("PRECMD:::", line)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
