@@ -44,7 +44,7 @@ class BaseModel():
         return dictionary_rep
     
     def __str__(self):
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__,self.id, self.__dict__)
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
 if __name__ == "__main__":
     BaseModel()
