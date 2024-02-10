@@ -197,12 +197,12 @@ class HBNBCommand(cmd.Cmd):
             elif not value:
                 print("** value missing **")
             else:
-                cast = None
+                dump = None
                 if not re.search('^".*"$', value):
                     if '.' in value:
                         cast = float
                     else:
-                        cast = int
+                        dump = int
                 else:
                     value = value.replace('"', '')
                 attributes = storage.attributes()[classname]
@@ -218,4 +218,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop(
+    HBNBCommand().cmdloop()
