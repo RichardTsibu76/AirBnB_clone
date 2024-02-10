@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" A model that defined the BaseModel class"""
+""" A model that defines the BaseModel class"""
 import uuid
 import json
 from datetime import datetime
@@ -8,11 +8,14 @@ import models
 class BaseModel():
     """ A class  that defines all attributes/methods for other classes.
 
+
     Attributes:
         id:
         created_at:
         updated_at:
     """
+
+
     def __init__(self, *args, **kwargs):
         """The base class constructer"""
         if kwargs != {}:
@@ -28,6 +31,7 @@ class BaseModel():
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             models.storage.new(self)
+
     
     def save(self):
         """A public instance method that updates "updated_at" attribute"""
@@ -41,9 +45,11 @@ class BaseModel():
         dictionary_rep['created_at'] = self.created_at.isoformat()
         dictionary_rep['updated_at'] = self.updated_at.isoformat()
         return dictionary_rep
+
     
     def __str__(self):
-        return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{:s}] ({:s}) {}".format(self.__class__.__name__,self.id, self.__dict__)
+
 
 if __name__ == "__main__":
     BaseModel()
