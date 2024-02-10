@@ -8,13 +8,11 @@ import models
 class BaseModel():
     """ A class  that defines all attributes/methods for other classes.
 
-
     Attributes:
         id:
         created_at:
         updated_at:
     """
-
 
     def __init__(self, *args, **kwargs):
         """The base class constructer"""
@@ -32,7 +30,6 @@ class BaseModel():
             self.updated_at = datetime.now()
             models.storage.new(self)
 
-    
     def save(self):
         """A public instance method that updates "updated_at" attribute"""
         self.updated_at = datetime.now()
@@ -45,11 +42,9 @@ class BaseModel():
         dictionary_rep['created_at'] = self.created_at.isoformat()
         dictionary_rep['updated_at'] = self.updated_at.isoformat()
         return dictionary_rep
-
     
     def __str__(self):
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__,self.id, self.__dict__)
-
 
 if __name__ == "__main__":
     BaseModel()
