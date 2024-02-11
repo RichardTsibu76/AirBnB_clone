@@ -5,13 +5,18 @@ Console module for AirBnB clone project
 import cmd
 from models import storage
 from models.base_model import BaseModel
-
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the AirBnB clone project"""
     intro = "Welcome to Our Console"
     prompt = '(hbnb) '
-    valid_classes = ['BaseModel']
+    valid_classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -92,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
             obj = args[0]
             for obj in objects.values():
                 obj_list.append(str(obj))
-                print(obj_list)
+            print(obj_list)
 
     def do_update(self, arg):
         """
