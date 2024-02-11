@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Console module for AirBnB clone project"""
-
+"""
+Console module for AirBnB clone project
+"""
 import cmd
 from models import storage
 from models.base_model import BaseModel
@@ -38,7 +39,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self,arg):
         """ Prints the str rep. of an instance based on the class name and id"""
-        #If the class name is missing, print ** class name missing **
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
@@ -57,17 +57,12 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes an instance based on the class name and id (save the change into the                JSON file)
         """
         args = arg.split(" ")
-        #If the class name is missing, print ** class name missing **
         if len(arg) == 0:
             print("** class name missing **")
-        #If the class name doesn’t exist, print ** class doesn't exist **
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-        #if the id is missing, print ** instance id missing **
         elif len(args) == 1:
             print("** instance id missing **")
-        #If the instance of the class name doesn’t exist for the id, print
-        # ** no instance found **
         else:
             key = args[0] + "." + args[1]
             if key in storage.all():
@@ -75,16 +70,12 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                  print("** no instance found **")
-        #If the instance of the class name doesn’t exist for the id, print 
-        # ** no instance found **
 
     def do_all(self, arg):
         """Prints all str. rep. of all instances based or not on the class name"""
         args = arg.split(" ")
         objects = storage.all()
         obj_list = []
-        #The printed result must be a list of strings (like the example below)
-        #if the class name doesn’t exist, print ** class doesn't exist **
         if not arg:
             for obj in objects.values():
                 obj_list.append(str(obj))
@@ -97,7 +88,8 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(str(obj))
             print(obj_list)
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating 
+        """
+        Updates an instance based on the class name and id by adding or updating 
         attribute (save the change into the JSON file)
         """
         args = arg.split(" ")
