@@ -7,14 +7,19 @@ from models.base_model import BaseModel
 class FileStorage():
     """ """
     def __init__(self):
-        """initiates file_storage class
-
-       Attributes:
-       __filepath: private instance attribute
-       __objects: private instance attribute
+        """initiates file_storage class for the AirBnB clone Project
+        class Methods:
+            all: Returns the object
+            new: update the dictionary id
+            save: serializes objects to JSON file
+            reload: Deserializes the JSON file to objects 
+        class Attributes:
+            __filepath: private instance attribute
+            __objects: private instance attribute
        """
         self.__file_path = "file.json"
         self.__objects = {}
+        self.class_dict = {"BaseModel": BaseModel}
 
     def all(self):
         """Returns the dictionary"""
@@ -39,8 +44,8 @@ class FileStorage():
             with open(self.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
                 for key, obj_dict in data.items():
-                    class_name, obj_id = key.split('.')
-                    obj = globals()[class_name](**obj_dict)
+                    class_name, obj_id = key.split(".")
+                    obj = self.class_dict[obj_dict["__class__"]](**obj_dict)
                     self.__objects[key] = obj
         except FileNotFoundError:
             pass
