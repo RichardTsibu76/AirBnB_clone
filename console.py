@@ -6,6 +6,7 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the AirBnB clone project"""
     intro = "Welcome to Our Console"
@@ -20,11 +21,11 @@ class HBNBCommand(cmd.Cmd):
         """EOF command to exit the program"""
         print()
         return True
-    
+
     def emptyline(self):
         """Called when an empty line is entered"""
         pass
-    
+
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves and prints the id"""
         args = arg.split(" ")
@@ -37,13 +38,13 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-    def do_show(self,arg):
-        """ Prints the str rep. of an instance based on the class name and id"""
+    def do_show(self, arg):
+        """ Prints the str rep. of an instance based on name and id"""
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
         elif args[0] not in self.valid_classes:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif len(args) == 1:
             print("**instance id missing**")
         else:
@@ -54,7 +55,9 @@ class HBNBCommand(cmd.Cmd):
                 print("**no instance found**")
 
     def do_destroy(self, arg):
-        """ Deletes an instance based on the class name and id (save the change into the                JSON file)
+        """
+        Deletes an instance based on the class name and id
+        (save to JSON file)
         """
         args = arg.split(" ")
         if len(arg) == 0:
@@ -69,10 +72,13 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[key]
                 storage.save()
             else:
-                 print("** no instance found **")
+                print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints all str. rep. of all instances based or not on the class name"""
+        """
+        Prints all str. rep. of all instances based or not
+        on the class name
+        """
         args = arg.split(" ")
         objects = storage.all()
         obj_list = []
@@ -85,12 +91,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj = args[0]
             for obj in objects.values():
-                    obj_list.append(str(obj))
-            print(obj_list)
+                obj_list.append(str(obj))
+                print(obj_list)
+
     def do_update(self, arg):
         """
-        Updates an instance based on the class name and id by adding or updating 
-        attribute (save the change into the JSON file)
+        Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file)
         """
         args = arg.split(" ")
         if len(arg) == 0:
