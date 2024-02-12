@@ -9,12 +9,13 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage():
     """ the FileStorage class of the AirBnB Clone Project"""
     __file_path = "file.json"
     __objects = {}
     class_dict = {
-        "BaseModel": BaseModel, 
+        "BaseModel": BaseModel,
         "User": User,
         "State": State,
         "City": City,
@@ -49,9 +50,9 @@ class FileStorage():
         try:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
-                for key, obj_dict in data.items():
+                for key, obj in data.items():
                     class_name, obj_id = key.split(".")
-                    obj = FileStorage.class_dict[obj_dict["__class__"]](**obj_dict)
-                    FileStorage.__objects[key] = obj
+                    objt = FileStorage.class_dict[obj["__class__"]](**obj_dict)
+                    FileStorage.__objects[key] = objt
         except FileNotFoundError:
             pass
