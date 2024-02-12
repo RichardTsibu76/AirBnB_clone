@@ -14,13 +14,13 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the AirBnB clone project"""
-    intro = "Welcome to Our Console"
+    intro = "Welcome to Our Console! Type help or ? to list commands.\n"
     prompt = '(hbnb) '
     valid_classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
-        return True
+        return SystemExit
 
     def do_EOF(self, arg):
         """EOF command to exit the program"""
@@ -36,36 +36,36 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
-            return False
+            return 
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-            return False
+            return
         else:
             new_instance = eval(args[0])()
             new_instance.save()
             print(new_instance.id)
-            return True
+            return
 
     def do_show(self, arg):
         """ Prints the str rep. of an instance based on name and id"""
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
-            return False
+            return
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-            return False
+            return
         elif len(args) == 1:
             print("**instance id missing**")
-            return False
+            return
         else:
             key = args[0] + "." + args[1]
             if key in storage.all():
                 print(storage.all()[key])
-                return True
+                return
             else:
                 print("**no instance found**")
-                return False
+                return
 
     def do_destroy(self, arg):
         """
@@ -75,22 +75,22 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
-            return False
+            return
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-            return False
+            return
         elif len(args) == 1:
             print("** instance id missing **")
-            return False
+            return
         else:
             key = args[0] + "." + args[1]
             if key in storage.all():
                 del storage.all()[key]
                 storage.save()
-                return True
+                return
             else:
                 print("** no instance found **")
-                return False
+                return
 
     def do_all(self, arg):
         """
@@ -104,16 +104,16 @@ class HBNBCommand(cmd.Cmd):
             for obj in objects.values():
                 obj_list.append(str(obj))
             print(obj_list)
-            return True
+            return
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-            return False
+            return
         else:
             obj = args[0]
             for obj in objects.values():
                 obj_list.append(str(obj))
             print(obj_list)
-            return True
+            return
 
     def do_update(self, arg):
         """
@@ -123,31 +123,31 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
-            return False
+            return
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
-            return False
+            return
         elif len(args) == 1:
             print("** instance id missing **")
-            return False
+            return
         else:
             key = args[0] + "." + args[1]
             if key not in storage.all():
                 print("** no instance found **")
-                return False
+                return
             elif len(args) == 2:
                 print("** attribute name missing **")
-                return False
+                return
             elif len(args) == 3:
                 print("** value missing **")
-                return False
+                return
             else:
                 obj = storage.all()[key]
                 attribute_name = args[2]
                 attribute_value = args[3]
                 setattr(obj, attribute_name, attribute_value)
                 obj.save()
-                return True
+                return
 
 
 if __name__ == '__main__':
