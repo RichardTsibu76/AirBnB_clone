@@ -10,7 +10,7 @@ from models.place import Place
 from models.review import Review
 
 
-class FileStorage():
+class FileStorage:
     """ the FileStorage class of the AirBnB Clone Project"""
     __file_path = "file.json"
     __objects = {}
@@ -30,12 +30,12 @@ class FileStorage():
 
     def all(self):
         """Returns the dictionary"""
-        return self.__objects
+        return self.__class__.__objects
 
     def new(self, obj):
         """A Public instance method that sets in the dictionary"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        self.__class__.__objects[key] = obj
 
     def save(self):
         """serializes objects to JSON file"""
@@ -50,9 +50,9 @@ class FileStorage():
         try:
             with open(FileStorage.__file_path, "r", encoding="utf-8") as file:
                 data = json.load(file)
-                for key, obj in data.items():
+                for key, val in data.items():
                     class_name, obj_id = key.split(".")
-                    objt = FileStorage.class_dict[obj["__class__"]](**obj)
-                    FileStorage.__objects[key] = objt
+                    obj = FileStorage.class_dict[val["__class__"]](**val)
+                    FileStorage.__objects[key] = obj
         except FileNotFoundError:
             pass
