@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         elif len(args) == 1:
-            print("**instance id missing**")
+            print("** instance id missing **")
             return
         else:
             key = args[0] + "." + args[1]
@@ -66,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[key])
                 return
             else:
-                print("**no instance found**")
+                print("** no instance found **")
                 return
 
     def do_destroy(self, arg):
