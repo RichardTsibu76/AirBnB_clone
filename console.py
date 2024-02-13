@@ -12,11 +12,13 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the AirBnB clone project"""
-    intro = "Welcome to Our Console! Type help or ? to list commands.\n"
     prompt = '(hbnb) '
-    valid_classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review']
+    valid_classes = [
+        'BaseModel', 'User', 'State', 'City', 'Amenity', 'Place', 'Review'
+    ]
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -36,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
-            return 
+            return
         elif args[0] not in self.valid_classes:
             print("** class doesn't exist **")
             return
