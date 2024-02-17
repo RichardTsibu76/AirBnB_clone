@@ -50,3 +50,5 @@ Documented commands (type help <topic>):
 EOF  help  quit
 (hbnb) 
 $
+
+0x01. AirBnB clone - Web static
